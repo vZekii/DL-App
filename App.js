@@ -23,15 +23,33 @@
 // };
 
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Camera } from 'expo-camera';
 
+// function HomeScreen({ navigation }) {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>Home Screen</Text>
+//       <Button
+//         title="Go to Details"
+//         onPress={() => navigation.navigate('Details')}
+//       />
+//       <Button
+//         title="Go to Camera"
+//         onPress={() => navigation.navigate('Camera')}
+//         />
+//     </View>
+//   );
+// }
+
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Welcome to My App!</Text>
+      <Text style={styles.message}>This is the home screen of the app. You can navigate to other screens using the buttons below.</Text>
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
@@ -39,12 +57,31 @@ function HomeScreen({ navigation }) {
       <Button
         title="Go to Camera"
         onPress={() => navigation.navigate('Camera')}
-        />
+      />
     </View>
   );
 }
 
 //no
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  message: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+});
+
 
 function CameraScreen() {
   const [hasPermission, setHasPermission] = React.useState(null);

@@ -39,6 +39,8 @@ function HomeScreen({ navigation }) {
   );
 }
 
+//hi smd
+
 function DetailsScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

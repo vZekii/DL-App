@@ -26,6 +26,7 @@ import * as React from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Camera } from 'expo-camera';
 
 function HomeScreen({ navigation }) {
   return (
@@ -35,11 +36,53 @@ function HomeScreen({ navigation }) {
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+      <Button
+        title="Go to Camera"
+        onPress={() => navigation.navigate('Camera')}
+        />
     </View>
   );
 }
 
 //no
+
+function CameraScreen() {
+  const [hasPermission, setHasPermission] = React.useState(null);
+  const [cameraRef, setCameraRef] = React.useState(null);
+
+  React.useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const takePhoto = async () => {
+    if (cameraRef) {
+      const photo = await cameraRef.takePictureAsync();
+      console.log(photo);
+    }
+  };
+
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Camera
+        style={{ flex: 1 }}
+        type={Camera.Constants.Type.back}
+        ref={(ref) => setCameraRef(ref)}
+      />
+      <Button title="Take Photo" onPress={takePhoto} />
+    </View>
+  );
+}
+
 
 function DetailsScreen() {
   return (
@@ -57,6 +100,7 @@ function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

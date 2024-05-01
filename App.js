@@ -39,7 +39,7 @@ function HomeScreen({ navigation }) {
   );
 }
 
-//hi smd
+//no
 
 function DetailsScreen() {
   return (

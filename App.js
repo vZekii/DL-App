@@ -48,7 +48,7 @@ import { Camera } from 'expo-camera';
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome to My App!</Text>
+      <Text style={styles.header}>Welcome to my app </Text>
       <Text style={styles.message}>This is the home screen of the app. You can navigate to other screens using the buttons below.</Text>
       <Button
         title="Go to Details"
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 function CameraScreen() {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [cameraRef, setCameraRef] = React.useState(null);
@@ -109,16 +108,30 @@ function CameraScreen() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <Camera
-        style={{ flex: 1 }}
-        type={Camera.Constants.Type.back}
-        ref={(ref) => setCameraRef(ref)}
-      />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ width: '90%', height: '50%' }}>
+        <Camera
+          style={{ flex: 1 }}
+          type={Camera.Constants.Type.back}
+          ref={(ref) => setCameraRef(ref)}
+        />
+      </View>
       <Button title="Take Photo" onPress={takePhoto} />
     </View>
   );
 }
+
+//   return (
+//     <View style={{ flex: 1 }}>
+//       <Camera
+//         style={{ flex: 1 }}
+//         type={Camera.Constants.Type.back}
+//         ref={(ref) => setCameraRef(ref)}
+//       />
+//       <Button title="Take Photo" onPress={takePhoto} />
+//     </View>
+//   );
+// }
 
 
 function DetailsScreen() {
